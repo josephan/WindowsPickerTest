@@ -37,7 +37,7 @@ class PickerTest extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={{marginBottom: 10}} onPress={this.addItem}>
-          <Text>Add New Item</Text>
+          <Text>Remove 4th Item</Text>
         </TouchableOpacity>
         <Picker style={{width: 400,}}
           selectedValue={this.state.selected}
