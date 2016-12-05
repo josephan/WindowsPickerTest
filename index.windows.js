@@ -9,23 +9,42 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity,
+  Picker
 } from 'react-native';
 
 class PickerTest extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [1, 2, 3, 4].map((i) => {
+        return (
+          <Picker.Item key={i} label={i.toString()} value={i} />
+        )
+      })
+    }
+    this.addItem = this.addItem.bind(this);
+  }
+
+  addItem() {
+    let newItem = this.state.items.length + 1;
+    let items = this.state.items.slice(0,3);
+    this.setState({items: items});
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.windows.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Ctrl+R to reload,{'\n'}
-          Shift+F10 or shake for dev menu
-        </Text>
+        <TouchableOpacity style={{marginBottom: 10}} onPress={this.addItem}>
+          <Text>Add New Item</Text>
+        </TouchableOpacity>
+        <Picker style={{width: 400,}}
+          selectedValue={this.state.selected}
+          onValueChange={(value) => this.setState({selected: value})}
+        >
+          {this.state.items}
+        </Picker>
       </View>
     );
   }
@@ -36,17 +55,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  buttonContainer: {
+    flexDirection: 'row',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  button: {
+    flex: 1,
+    backgroundColor: 'steelblue',
+
   },
 });
 
